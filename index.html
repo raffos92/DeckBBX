@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BeyDeck</title>
+<style>
+:root {
+  --bg:       #07080f;
+  --bg2:      #0e1118;
+  --bg3:      #141820;
+  --border:   #1e2535;
+  --border2:  #2a3347;
+  --txt:      #e8eaf0;
+  --txt2:     #8b95ab;
+  --txt3:     #4a5568;
+  --accent:   #00c8ff;
+  --accent-d: rgba(0,200,255,.12);
+  --red:      #ef4444;
+  --red-d:    rgba(239,68,68,.12);
+  --green:    #10b981;
+  --green-d:  rgba(16,185,129,.12);
+  --gold:     #f59e0b;
+  --purple:   #a855f7;
+  --t-god:    #a855f7;
+  --t-s:      #f59e0b;
+  --t-a:      #00c8ff;
+  --t-b:      #64748b;
+  --t-c:      #374151;
+  --t-top:    #f59e0b;
+  --t-std:    #374151;
+  --radius:   12px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:system-ui,-apple-system,sans-serif;min-height:100vh;max-width:480px;margin:0 auto}
+.screen{display:none;flex-direction:column;min-height:100vh}
+.screen.active{display:flex}
+
+/* ── HEADER ── */
+.hdr{background:var(--bg2);border-bottom:1px solid var(--border);padding:.75rem 1rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50}
+.hdr-logo{font-size:1.1rem;font-weight:900;letter-spacing:.06em;background:linear-gradient(135deg,var(--accent),#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hdr-icon{background:none;border:none;color:var(--txt2);cursor:pointer;font-size:1.2rem;padding:.25rem .35rem;border-radius:6px;transition:background .15s}
+.hdr-icon:hover{background:var(--bg3)}
+.hdr-back{display:flex;align-items:center;gap:.4rem;background:none;border:none;color:var(--txt2);cursor:pointer;font-size:.85rem;font-weight:600}
+
+/* ── CONTENT ── */
+.content{padding:1rem;flex:1}
+
+/* ── CARDS ── */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;margin-bottom:.6rem}
+.card-sm{padding:.6rem .75rem;margin-bottom:.45rem}
+
+/* ── DECK LIST ── */
+.deck-pinned{background:linear-gradient(135deg,rgba(0,200,255,.08),rgba(124,58,237,.06));border:1.5px solid var(--accent);border-radius:var(--radius);padding:1rem;margin-bottom:.8rem;position:relative;cursor:pointer}
+.deck-pinned-badge{position:absolute;top:.6rem;right:.75rem;font-size:.6rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-d);padding:3px 8px;border-radius:20px}
+.deck-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:.9rem 1rem;margin-bottom:.5rem;cursor:pointer;transition:border-color .15s,transform .1s}
+.deck-card:hover{border-color:var(--border2);transform:translateY(-1px)}
+.deck-card:active{transform:translateY(0)}
+.deck-card.selected{border-color:var(--accent)}
+.deck-name{font-size:.95rem;font-weight:700;margin-bottom:.5rem}
+.deck-beys{display:flex;gap:.4rem;margin-bottom:.5rem;flex-wrap:wrap}
+.deck-bey-chip{font-size:.65rem;font-weight:600;padding:3px 8px;border-radius:20px;background:var(--bg3);color:var(--txt2);border:1px solid var(--border)}
+.deck-footer{display:flex;align-items:center;justify-content:space-between}
+.deck-pts{font-size:.8rem;font-weight:700;color:var(--accent)}
+.deck-actions{display:flex;gap:.4rem}
+.btn-icon{background:none;border:none;color:var(--txt3);cursor:pointer;font-size:.9rem;padding:.2rem .35rem;border-radius:6px;transition:color .15s}
+.btn-icon:hover{color:var(--txt)}
+.empty-state{text-align:center;padding:3rem 1rem;color:var(--txt3)}
+.empty-icon{font-size:3rem;margin-bottom:.75rem}
+.empty-title{font-size:1rem;font-weight:700;color:var(--txt2);margin-bottom:.4rem}
+.empty-sub{font-size:.8rem;line-height:1.6}
+
+/* ── FAB ── */
+.fab{position:fixed;bottom:1.5rem;right:50%;transform:translateX(calc(240px - 50%));background:var(--accent);color:#000;border:none;border-radius:30px;padding:.75rem 1.5rem;font-size:.9rem;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(0,200,255,.3);transition:transform .15s,box-shadow .15s;z-index:40}
+.fab:hover{transform:translateX(calc(240px - 50%)) scale(1.03);box-shadow:0 6px 24px rgba(0,200,255,.4)}
+@media(max-width:480px){.fab{right:1rem;transform:none}.fab:hover{transform:scale(1.03)}}
+
+/* ── BUDGET BAR ── */
+.budget-wrap{background:var(--bg2);border-bottom:1px solid var(--border);padding:.8rem 1rem;position:sticky;top:57px;z-index:40}
+.budget-label{display:flex;justify-content:space-between;margin-bottom:.4rem;font-size:.75rem}
+.budget-num{font-size:1rem;font-weight:900}
+.budget-bar{height:8px;background:var(--bg3);border-radius:4px;overflow:hidden}
+.budget-fill{height:100%;border-radius:4px;transition:width .3s,background .3s}
+.budget-ok   .budget-fill{background:var(--green)}
+.budget-warn .budget-fill{background:var(--gold)}
+.budget-over .budget-fill{background:var(--red)}
+
+/* ── BEY SLOT ── */
+.bey-slot{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:.65rem;overflow:hidden}
+.bey-slot-hdr{display:flex;align-items:center;justify-content:space-between;padding:.75rem 1rem;cursor:pointer;user-select:none}
+.bey-slot-title{font-size:.85rem;font-weight:700;color:var(--txt2);text-transform:uppercase;letter-spacing:.06em}
+.bey-slot-pts{font-size:.85rem;font-weight:800;color:var(--txt)}
+.bey-slot-body{padding:.65rem 1rem .9rem;border-top:1px solid var(--border)}
+.bey-slot.has-malus{border-color:rgba(239,68,68,.5)}
+.bey-slot.has-malus .bey-slot-hdr{background:var(--red-d)}
+.bey-slot.has-cx{border-color:rgba(16,185,129,.4)}
+.bey-slot.has-cx .bey-slot-hdr{background:var(--green-d)}
+
+/* ── TYPE TABS ── */
+.type-tabs{display:flex;gap:.3rem;margin-bottom:.8rem}
+.type-tab{flex:1;padding:.5rem .25rem;border:1.5px solid var(--border);border-radius:8px;background:none;color:var(--txt2);font-size:.72rem;font-weight:700;cursor:pointer;transition:all .15s;text-align:center}
+.type-tab.active{border-color:var(--accent);color:var(--accent);background:var(--accent-d)}
+
+/* ── FORM ELEMENTS ── */
+.field-lbl{font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--txt3);margin-bottom:.3rem;display:flex;align-items:center;gap:.4rem}
+.field-row{margin-bottom:.6rem}
+.sel-wrap{position:relative}
+.sel-wrap select{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.82rem;color:var(--txt);outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;padding-right:2rem}
+.sel-wrap::after{content:"▾";position:absolute;right:.75rem;top:50%;transform:translateY(-50%);color:var(--txt3);pointer-events:none;font-size:.75rem}
+.sel-wrap select:focus{border-color:var(--accent)}
+.input{width:100%;background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.55rem .75rem;font-size:.9rem;color:var(--txt);outline:none}
+.input:focus{border-color:var(--accent)}
+.input::placeholder{color:var(--txt3)}
+
+/* ── BADGES ── */
+.badge{display:inline-block;font-size:.6rem;font-weight:800;padding:2px 7px;border-radius:20px;letter-spacing:.05em;text-transform:uppercase}
+.badge-malus{background:var(--red-d);color:var(--red);border:1px solid rgba(239,68,68,.3)}
+.badge-cx{background:var(--green-d);color:var(--green);border:1px solid rgba(16,185,129,.3)}
+.badge-tier-GOD{background:rgba(168,85,247,.15);color:var(--t-god);border:1px solid rgba(168,85,247,.3)}
+.badge-tier-S{background:rgba(245,158,11,.12);color:var(--t-s);border:1px solid rgba(245,158,11,.3)}
+.badge-tier-A{background:var(--accent-d);color:var(--t-a);border:1px solid rgba(0,200,255,.3)}
+.badge-tier-B{background:rgba(100,116,139,.12);color:var(--t-b);border:1px solid rgba(100,116,139,.3)}
+.badge-tier-C{background:rgba(55,65,81,.2);color:var(--txt3);border:1px solid var(--border)}
+.badge-tier-TOP{background:rgba(245,158,11,.12);color:var(--t-s);border:1px solid rgba(245,158,11,.3)}
+.badge-tier-STANDARD{background:rgba(55,65,81,.2);color:var(--txt3);border:1px solid var(--border)}
+
+/* ── BUTTONS ── */
+.btn-primary{display:block;width:100%;padding:.8rem;background:var(--accent);color:#000;border:none;border-radius:var(--radius);font-size:.9rem;font-weight:800;cursor:pointer;margin-top:.5rem;transition:opacity .15s}
+.btn-primary:disabled{opacity:.35;cursor:not-allowed}
+.btn-outline{display:block;width:100%;padding:.7rem;background:transparent;color:var(--txt2);border:1.5px solid var(--border);border-radius:var(--radius);font-size:.85rem;font-weight:600;cursor:pointer;margin-top:.5rem;transition:border-color .15s}
+.btn-outline:hover{border-color:var(--border2)}
+.btn-danger{color:var(--red);border-color:rgba(239,68,68,.3)}
+.btn-danger:hover{border-color:var(--red)}
+
+/* ── ADMIN ── */
+.admin-tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:1rem}
+.atab{flex:1;padding:.7rem .5rem;background:none;border:none;color:var(--txt3);font-size:.8rem;font-weight:700;cursor:pointer;letter-spacing:.04em;text-transform:uppercase;border-bottom:2px solid transparent;transition:all .15s}
+.atab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.type-filter{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:1rem}
+.tfilter{padding:.35rem .7rem;border:1px solid var(--border);border-radius:20px;background:none;color:var(--txt3);font-size:.7rem;font-weight:700;cursor:pointer;transition:all .15s}
+.tfilter.active{border-color:var(--accent);color:var(--accent);background:var(--accent-d)}
+.comp-row{display:flex;align-items:center;gap:.6rem;padding:.55rem 0;border-bottom:1px solid var(--border)}
+.comp-row:last-child{border-bottom:none}
+.comp-img{width:36px;height:36px;border-radius:8px;object-fit:contain;background:var(--bg3);flex-shrink:0}
+.comp-img-placeholder{width:36px;height:36px;border-radius:8px;background:var(--bg3);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--txt3);flex-shrink:0;text-align:center;line-height:1.2;border:1px solid var(--border)}
+.comp-name{flex:1;font-size:.82rem;font-weight:600;min-width:0}
+.comp-meta{font-size:.65rem;color:var(--txt3)}
+.comp-tier-sel{font-size:.72rem;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:.25rem .4rem;color:var(--txt);cursor:pointer;outline:none}
+.malus-row{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.7rem .85rem;margin-bottom:.5rem}
+.malus-row-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.45rem}
+.malus-label{font-size:.8rem;font-weight:700;color:var(--red)}
+.malus-pts-badge{font-size:.65rem;font-weight:800;padding:2px 8px;background:var(--red-d);color:var(--red);border-radius:20px}
+.malus-parts{font-size:.72rem;color:var(--txt2)}
+.malus-add-form{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:.85rem;margin-top:.75rem}
+.malus-add-form .field-row{margin-bottom:.5rem}
+.section-title{font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--txt3);margin-bottom:.75rem}
+.row-2{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+
+/* ── MISC ── */
+.divider{height:1px;background:var(--border);margin:.75rem 0}
+.pts-breakdown{font-size:.72rem;color:var(--txt2);margin-top:.45rem;line-height:1.7}
+.pts-line{display:flex;justify-content:space-between}
+.pts-line span{font-weight:600}
+.pts-total{font-size:.82rem;font-weight:800;color:var(--txt);border-top:1px solid var(--border);padding-top:.35rem;margin-top:.2rem}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ SCREEN: LIST -->
+<div id="screen-list" class="screen active">
+  <div class="hdr">
+    <div class="hdr-logo">BeyDeck</div>
+    <button class="hdr-icon" onclick="goAdmin()" title="Admin Panel">⚙️</button>
+  </div>
+  <div class="content" style="padding-bottom:5rem">
+    <div id="list-pinned"></div>
+    <div id="list-decks"></div>
+  </div>
+  <button class="fab" onclick="newDeck()">＋ Nuovo Deck</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SCREEN: BUILDER -->
+<div id="screen-builder" class="screen">
+  <div class="hdr">
+    <button class="hdr-back" onclick="goList()">← Lista</button>
+    <div id="builder-title" style="font-size:.85rem;font-weight:700;color:var(--txt2)"></div>
+    <div></div>
+  </div>
+
+  <div class="budget-wrap" id="budget-wrap">
+    <div class="budget-label">
+      <span style="color:var(--txt2);font-weight:600">Budget Deck</span>
+      <span><span class="budget-num" id="budget-cur">0</span><span style="color:var(--txt3)"> / 30 PT</span></span>
+    </div>
+    <div class="budget-bar"><div class="budget-fill" id="budget-fill" style="width:0%"></div></div>
+  </div>
+
+  <div class="content" style="padding-bottom:5.5rem">
+    <div class="field-row" style="margin-bottom:.9rem">
+      <label class="field-lbl">Nome Deck</label>
+      <input class="input" id="deck-name-input" type="text" placeholder="es. Il mio deck meta" />
+    </div>
+    <div id="bey-slots"></div>
+  </div>
+
+  <div style="position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;padding:.75rem 1rem;background:var(--bg2);border-top:1px solid var(--border);z-index:40">
+    <button class="btn-primary" id="btn-save" onclick="saveDeck()">Salva Deck</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ SCREEN: ADMIN -->
+<div id="screen-admin" class="screen">
+  <div class="hdr">
+    <button class="hdr-back" onclick="goList()">← Indietro</button>
+    <div class="hdr-logo" style="font-size:.9rem">Admin Panel</div>
+    <div></div>
+  </div>
+  <div class="content" style="padding-bottom:2rem">
+    <div class="admin-tabs">
+      <button class="atab active" id="atab-comp"    onclick="switchAdminTab('comp')">Componenti</button>
+      <button class="atab"        id="atab-bonmal"  onclick="switchAdminTab('bonmal')">Bonus / Malus</button>
+    </div>
+    <div id="admin-comp-panel"></div>
+    <div id="admin-bonmal-panel" style="display:none"></div>
+  </div>
+</div>
+
+<script src="data.js"></script>
+<script>
+// ═══════════════════════════════════════════════════════ STATE
+
+const LS_DECKS   = 'bbx_decks';
+const LS_PINNED  = 'bbx_pinned';
+const LS_CONFIG  = 'bbx_config';
+const LS_COMP    = 'bbx_comp_overrides';
+
+// Deep-clone defaults from data.js
+let cfg  = JSON.parse(JSON.stringify(BBX_DATA.config));
+let comp = JSON.parse(JSON.stringify(BBX_DATA.components));
+
+// Merge localStorage overrides
+function loadOverrides() {
+  const sc = localStorage.getItem(LS_CONFIG);
+  if (sc) Object.assign(cfg, JSON.parse(sc));
+  const oc = localStorage.getItem(LS_COMP);
+  if (oc) {
+    const ov = JSON.parse(oc);
+    for (const [type, list] of Object.entries(ov)) {
+      if (!comp[type]) comp[type] = [];
+      list.forEach(o => {
+        const idx = comp[type].findIndex(c => c.id === o.id);
+        if (idx >= 0) Object.assign(comp[type][idx], o);
+        else comp[type].push(o);
+      });
+    }
+  }
+}
+loadOverrides();
+
+function saveConfig()   { localStorage.setItem(LS_CONFIG, JSON.stringify(cfg)); }
+function saveCompOverride(type, id, patch) {
+  const raw = localStorage.getItem(LS_COMP);
+  const ov  = raw ? JSON.parse(raw) : {};
+  if (!ov[type]) ov[type] = [];
+  const idx = ov[type].findIndex(c => c.id === id);
+  if (idx >= 0) Object.assign(ov[type][idx], patch);
+  else ov[type].push({ id, ...patch });
+  localStorage.setItem(LS_COMP, JSON.stringify(ov));
+  // Also update live comp object
+  const ci = comp[type].findIndex(c => c.id === id);
+  if (ci >= 0) Object.assign(comp[type][ci], patch);
+}
+
+function getDecks()   { return JSON.parse(localStorage.getItem(LS_DECKS) || '[]'); }
+function saveDecks(d) { localStorage.setItem(LS_DECKS, JSON.stringify(d)); }
+function getPinned()  { return localStorage.getItem(LS_PINNED) || null; }
+function setPinned(id){ localStorage.setItem(LS_PINNED, id || ''); }
+
+// Builder state
+let editingDeck = null;
+
+// Admin state
+let adminTypeFilter = 'blade';
+
+// ═══════════════════════════════════════════════════════ HELPERS
+
+function findComp(type, id) {
+  return comp[type]?.find(c => c.id === id) || null;
+}
+
+const TIER_ORDER = ['GOD','S','A','B','C','TOP','STANDARD'];
+const TIER_LABELS = { GOD:'GOD', S:'S', A:'A', B:'B', C:'C', TOP:'TOP', STANDARD:'STD' };
+
+function tierColor(tier) {
+  const map = { GOD:'var(--t-god)', S:'var(--t-s)', A:'var(--t-a)',
+                B:'var(--t-b)',     C:'var(--t-c)', TOP:'var(--t-top)', STANDARD:'var(--t-std)' };
+  return map[tier] || 'var(--t-c)';
+}
+
+function tierBadge(tier) {
+  return `<span class="badge badge-tier-${tier}">${TIER_LABELS[tier] || tier}</span>`;
+}
+
+function emptyBey() {
+  return { type:'standard', blade:null, ratchet:null, bit:null,
+           lockchip:null, assistblade:null, overblade:null };
+}
+
+// ═══════════════════════════════════════════════════════ POINT CALC
+
+function calcBeyPts(bey) {
+  let pts   = 0;
+  let malus = 0;
+  let cx    = false;
+
+  if (bey.type === 'standard') {
+    const b = findComp('blade', bey.blade);
+    pts += b?.points || 0;
+  } else {
+    // CX / CX Infiniti: blade = Main Metal Blade
+    const b     = findComp('blade', bey.blade);
+    const chip  = findComp('lockchip', bey.lockchip);
+    const asst  = findComp('assistblade', bey.assistblade);
+    const over  = bey.type === 'cxinfiniti' ? findComp('overblade', bey.overblade) : null;
+    const bladePts = (b?.points||0) + (chip?.points||0) + (asst?.points||0) + (over?.points||0);
+    const disc  = cfg.cxDiscount || -2;
+    pts += Math.max(0, bladePts + disc);
+    cx = true;
+  }
+
+  const r = findComp('ratchet', bey.ratchet);
+  const t = findComp('bit',     bey.bit);
+  pts += (r?.points || 0) + (t?.points || 0);
+
+  // Malus check
+  for (const mc of (cfg.malusCombos || [])) {
+    const bladeMatch   = !mc.blade   || mc.blade   === bey.blade;
+    const ratchetMatch = !mc.ratchet || mc.ratchet === bey.ratchet ||
+                         (Array.isArray(mc.ratchet) && mc.ratchet.includes(bey.ratchet));
+    const bitMatch     = !mc.bit     || mc.bit     === bey.bit;
+    if (bladeMatch && ratchetMatch && bitMatch) { malus = mc.malus; break; }
+  }
+  pts += malus;
+
+  return { total: pts, malus, cx };
+}
+
+function calcDeckPts(deck) {
+  return deck.beys.reduce((s, b) => s + calcBeyPts(b).total, 0);
+}
+
+function budgetState(pts) {
+  if (pts > 30) return 'over';
+  if (pts > 24) return 'warn';
+  return 'ok';
+}
+
+// ═══════════════════════════════════════════════════════ NAV
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function goList()  { show('screen-list');  renderList(); }
+function goAdmin() { show('screen-admin'); renderAdmin(); }
+
+// ═══════════════════════════════════════════════════════ LIST SCREEN
+
+function renderList() {
+  const decks  = getDecks();
+  const pinned = getPinned();
+  const pinEl  = document.getElementById('list-pinned');
+  const listEl = document.getElementById('list-decks');
+
+  const pinnedDeck = decks.find(d => d.id === pinned);
+  if (pinnedDeck) {
+    const pts = calcDeckPts(pinnedDeck);
+    pinEl.innerHTML = `
+      <div class="deck-pinned" onclick="editDeck('${pinnedDeck.id}')">
+        <div class="deck-pinned-badge">⭐ SELEZIONATO</div>
+        <div class="deck-name" style="margin-bottom:.55rem">${esc(pinnedDeck.name)}</div>
+        <div class="deck-beys">${deckBeyChips(pinnedDeck)}</div>
+        <div class="deck-footer">
+          <span class="deck-pts">${pts} / 30 PT</span>
+          <div class="deck-actions" onclick="event.stopPropagation()">
+            <button class="btn-icon" onclick="deleteDeck('${pinnedDeck.id}')" title="Elimina">🗑</button>
+          </div>
+        </div>
+      </div>`;
+  } else {
+    pinEl.innerHTML = '';
+  }
+
+  const others = decks.filter(d => d.id !== pinned);
+  if (decks.length === 0) {
+    listEl.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-icon">🌀</div>
+        <div class="empty-title">Nessun deck ancora</div>
+        <div class="empty-sub">Crea il tuo primo deck con il pulsante qui sotto</div>
+      </div>`;
+    return;
+  }
+
+  listEl.innerHTML = others.map(d => {
+    const pts  = calcDeckPts(d);
+    const bs   = budgetState(pts);
+    const col  = bs === 'ok' ? 'var(--green)' : bs === 'warn' ? 'var(--gold)' : 'var(--red)';
+    return `
+      <div class="deck-card" onclick="editDeck('${d.id}')">
+        <div class="deck-name">${esc(d.name)}</div>
+        <div class="deck-beys">${deckBeyChips(d)}</div>
+        <div class="deck-footer">
+          <span class="deck-pts" style="color:${col}">${pts} / 30 PT</span>
+          <div class="deck-actions" onclick="event.stopPropagation()">
+            <button class="btn-icon" onclick="pinDeck('${d.id}')" title="Seleziona">📌</button>
+            <button class="btn-icon" onclick="deleteDeck('${d.id}')" title="Elimina">🗑</button>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function deckBeyChips(deck) {
+  return deck.beys.map((b,i) => {
+    const blade = findComp(b.type === 'standard' ? 'blade' : 'blade', b.blade);
+    const bit   = findComp('bit', b.bit);
+    const lbl   = [blade?.name, bit?.name].filter(Boolean).join(' · ') || `Bey ${i+1}`;
+    return `<span class="deck-bey-chip">${esc(lbl)}</span>`;
+  }).join('');
+}
+
+function pinDeck(id) {
+  setPinned(id);
+  renderList();
+}
+
+function deleteDeck(id) {
+  if (!confirm('Eliminare questo deck?')) return;
+  let decks = getDecks().filter(d => d.id !== id);
+  saveDecks(decks);
+  if (getPinned() === id) setPinned(null);
+  renderList();
+}
+
+function newDeck() {
+  editingDeck = {
+    id:        'deck_' + Date.now(),
+    name:      '',
+    createdAt: Date.now(),
+    beys:      [emptyBey(), emptyBey(), emptyBey()],
+  };
+  show('screen-builder');
+  renderBuilder();
+}
+
+function editDeck(id) {
+  const decks = getDecks();
+  const d = decks.find(x => x.id === id);
+  if (!d) return;
+  editingDeck = JSON.parse(JSON.stringify(d));
+  show('screen-builder');
+  renderBuilder();
+}
+
+// ═══════════════════════════════════════════════════════ BUILDER SCREEN
+
+function renderBuilder() {
+  document.getElementById('deck-name-input').value = editingDeck.name;
+  document.getElementById('builder-title').textContent = editingDeck.name || 'Nuovo Deck';
+  renderBeySlots();
+  updateBudget();
+}
+
+function renderBeySlots() {
+  const el = document.getElementById('bey-slots');
+  el.innerHTML = editingDeck.beys.map((b,i) => renderBeySlot(b,i)).join('');
+}
+
+function renderBeySlot(bey, idx) {
+  const { total, malus, cx } = calcBeyPts(bey);
+  const hasMalus = malus > 0;
+  const hasCx    = cx && total >= 0;
+
+  let classes = 'bey-slot';
+  if (hasMalus) classes += ' has-malus';
+  else if (hasCx) classes += ' has-cx';
+
+  const badges = [
+    hasMalus ? `<span class="badge badge-malus">+${malus} MALUS</span>` : '',
+    hasCx    ? `<span class="badge badge-cx">${cfg.cxDiscount} CX</span>` : '',
+  ].filter(Boolean).join(' ');
+
+  return `<div class="${classes}" id="slot-${idx}">
+    <div class="bey-slot-hdr" onclick="toggleSlot(${idx})">
+      <div>
+        <div class="bey-slot-title">Bey ${idx+1}</div>
+        ${badges ? `<div style="margin-top:.25rem">${badges}</div>` : ''}
+      </div>
+      <div class="bey-slot-pts">${total} PT</div>
+    </div>
+    <div class="bey-slot-body" id="slot-body-${idx}">
+      ${renderBeyBody(bey, idx)}
+    </div>
+  </div>`;
+}
+
+function toggleSlot(idx) {
+  const body = document.getElementById(`slot-body-${idx}`);
+  body.style.display = body.style.display === 'none' ? '' : 'none';
+}
+
+function renderBeyBody(bey, idx) {
+  const isStd = bey.type === 'standard';
+  const isCx  = bey.type === 'cx';
+  const isCxi = bey.type === 'cxinfiniti';
+
+  return `
+    <!-- Type tabs -->
+    <div class="type-tabs">
+      <button class="type-tab ${isStd ? 'active':''}" onclick="setBeyType(${idx},'standard')">Standard / UX</button>
+      <button class="type-tab ${isCx  ? 'active':''}" onclick="setBeyType(${idx},'cx')">CX</button>
+      <button class="type-tab ${isCxi ? 'active':''}" onclick="setBeyType(${idx},'cxinfiniti')">CX Infiniti</button>
+    </div>
+
+    <!-- Blade -->
+    <div class="field-row">
+      <div class="field-lbl">
+        ${isStd ? 'Lama (Blade)' : 'Main / Metal Blade'}
+        ${bey.blade ? tierBadge(findComp('blade',bey.blade)?.tier||'C') : ''}
+      </div>
+      ${compSelect('blade','blade',bey.blade,idx)}
+    </div>
+
+    ${(isCx || isCxi) ? `
+    <!-- Lock Chip -->
+    <div class="field-row">
+      <div class="field-lbl">Lock Chip ${bey.lockchip ? tierBadge(findComp('lockchip',bey.lockchip)?.tier||'C') : ''}</div>
+      ${compSelect('lockchip','lockchip',bey.lockchip,idx)}
+    </div>
+    <!-- Assist Blade -->
+    <div class="field-row">
+      <div class="field-lbl">Assist Blade ${bey.assistblade ? tierBadge(findComp('assistblade',bey.assistblade)?.tier||'C') : ''}</div>
+      ${compSelect('assistblade','assistblade',bey.assistblade,idx)}
+    </div>` : ''}
+
+    ${isCxi ? `
+    <!-- Over Blade -->
+    <div class="field-row">
+      <div class="field-lbl">Over Blade ${bey.overblade ? tierBadge(findComp('overblade',bey.overblade)?.tier||'C') : ''}</div>
+      ${compSelect('overblade','overblade',bey.overblade,idx)}
+    </div>` : ''}
+
+    <div class="row-2">
+      <div class="field-row">
+        <div class="field-lbl">Ratchet ${bey.ratchet ? tierBadge(findComp('ratchet',bey.ratchet)?.tier||'STANDARD') : ''}</div>
+        ${compSelect('ratchet','ratchet',bey.ratchet,idx)}
+      </div>
+      <div class="field-row">
+        <div class="field-lbl">Bit ${bey.bit ? tierBadge(findComp('bit',bey.bit)?.tier||'C') : ''}</div>
+        ${compSelect('bit','bit',bey.bit,idx)}
+      </div>
+    </div>
+
+    ${renderBreakdown(bey, idx)}`;
+}
+
+function compSelect(field, type, selectedId, slotIdx) {
+  const items = comp[type] || [];
+  // Group by tier
+  const tiers = {};
+  items.forEach(c => {
+    const t = c.tier || 'C';
+    if (!tiers[t]) tiers[t] = [];
+    tiers[t].push(c);
+  });
+
+  const optGroups = TIER_ORDER
+    .filter(t => tiers[t]?.length)
+    .map(t => {
+      const pts = typeof tiers[t][0]?.points !== 'undefined' ? tiers[t][0].points : 0;
+      const opts = tiers[t].map(c =>
+        `<option value="${c.id}" ${c.id===selectedId?'selected':''}>${c.name} (${c.points} PT)</option>`
+      ).join('');
+      return `<optgroup label="${TIER_LABELS[t]||t} — ${tiers[t][0]?.points||0} PT">${opts}</optgroup>`;
+    }).join('');
+
+  return `<div class="sel-wrap">
+    <select onchange="setBeyComp(${slotIdx},'${field}',this.value)">
+      <option value="">— seleziona —</option>
+      ${optGroups}
+    </select>
+  </div>`;
+}
+
+function renderBreakdown(bey, idx) {
+  const { total, malus, cx } = calcBeyPts(bey);
+
+  const blade   = findComp('blade', bey.blade);
+  const ratchet = findComp('ratchet', bey.ratchet);
+  const bit     = findComp('bit', bey.bit);
+  const chip    = findComp('lockchip', bey.lockchip);
+  const asst    = findComp('assistblade', bey.assistblade);
+  const over    = findComp('overblade', bey.overblade);
+
+  const lines = [];
+  if (bey.type === 'standard') {
+    if (blade) lines.push([blade.name, blade.points]);
+  } else {
+    if (blade) lines.push([`Main Blade: ${blade.name}`, blade.points]);
+    if (chip)  lines.push([`Chip: ${chip.name}`, chip.points]);
+    if (asst)  lines.push([`Assist: ${asst.name}`, asst.points]);
+    if (over)  lines.push([`Over: ${over.name}`, over.points]);
+    lines.push(['Sconto CX', cfg.cxDiscount]);
+  }
+  if (ratchet) lines.push([`Ratchet: ${ratchet.name}`, ratchet.points]);
+  if (bit)     lines.push([`Bit: ${bit.name}`, bit.points]);
+  if (malus > 0) lines.push([`⚠️ Malus Combo Meta`, `+${malus}`]);
+
+  if (!lines.length) return '';
+
+  return `<div class="pts-breakdown">
+    ${lines.map(([k,v]) => `
+      <div class="pts-line">
+        <span style="color:var(--txt3)">${k}</span>
+        <span style="color:${typeof v==='number'&&v<0?'var(--green)':malus&&k.includes('Malus')?'var(--red)':'var(--txt)'}">${typeof v==='number'?(v>0?'+':'')+v:v}</span>
+      </div>`).join('')}
+    <div class="pts-line pts-total">
+      <span>Totale Bey</span>
+      <span>${total} PT</span>
+    </div>
+  </div>`;
+}
+
+function setBeyType(idx, type) {
+  editingDeck.beys[idx].type = type;
+  editingDeck.beys[idx].lockchip    = null;
+  editingDeck.beys[idx].assistblade = null;
+  editingDeck.beys[idx].overblade   = null;
+  refreshSlot(idx);
+}
+
+function setBeyComp(idx, field, value) {
+  editingDeck.beys[idx][field] = value || null;
+  document.getElementById('deck-name-input'); // trigger read
+  refreshSlot(idx);
+}
+
+function refreshSlot(idx) {
+  const bey = editingDeck.beys[idx];
+  const { total, malus, cx } = calcBeyPts(bey);
+  const slot = document.getElementById(`slot-${idx}`);
+  slot.outerHTML = renderBeySlot(bey, idx);
+  updateBudget();
+}
+
+function updateBudget() {
+  const pts   = calcDeckPts(editingDeck);
+  const state = budgetState(pts);
+  const pct   = Math.min(100, (pts / 30) * 100);
+
+  document.getElementById('budget-cur').textContent = pts;
+  const wrap = document.getElementById('budget-wrap');
+  wrap.className = 'budget-wrap budget-' + state;
+  document.getElementById('budget-fill').style.width = pct + '%';
+
+  const btn = document.getElementById('btn-save');
+  btn.disabled = pts > 30;
+  btn.textContent = pts > 30 ? `Budget superato (${pts} / 30 PT)` : 'Salva Deck';
+}
+
+function saveDeck() {
+  const nameInput = document.getElementById('deck-name-input').value.trim();
+  editingDeck.name = nameInput || `Deck ${new Date().toLocaleDateString('it-IT')}`;
+  const decks  = getDecks();
+  const idx    = decks.findIndex(d => d.id === editingDeck.id);
+  if (idx >= 0) decks[idx] = editingDeck;
+  else decks.unshift(editingDeck);
+  saveDecks(decks);
+  goList();
+}
+
+// ═══════════════════════════════════════════════════════ ADMIN SCREEN
+
+function switchAdminTab(tab) {
+  document.getElementById('admin-comp-panel').style.display  = tab==='comp'   ? '' : 'none';
+  document.getElementById('admin-bonmal-panel').style.display= tab==='bonmal' ? '' : 'none';
+  document.getElementById('atab-comp').classList.toggle('active',  tab==='comp');
+  document.getElementById('atab-bonmal').classList.toggle('active', tab==='bonmal');
+}
+
+function renderAdmin() {
+  renderAdminComp();
+  renderAdminBonusMalus();
+}
+
+function renderAdminComp() {
+  const typeOrder = ['blade','ratchet','bit','assistblade','overblade','lockchip'];
+  const typeLabels = { blade:'Lame', ratchet:'Ratchet', bit:'Bit',
+                       assistblade:'Assist Blade', overblade:'Over Blade', lockchip:'Lock Chip' };
+  const tiers = ['GOD','S','A','B','C','TOP','STANDARD'];
+
+  const filterHtml = typeOrder.map(t =>
+    `<button class="tfilter ${t===adminTypeFilter?'active':''}" onclick="setAdminFilter('${t}')">${typeLabels[t]}</button>`
+  ).join('');
+
+  const items = comp[adminTypeFilter] || [];
+  const sorted = [...items].sort((a,b) => {
+    const ai = tiers.indexOf(a.tier), bi = tiers.indexOf(b.tier);
+    return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi) || a.name.localeCompare(b.name);
+  });
+
+  const tierOpts = tiers.map(t => `<option value="${t}">${TIER_LABELS[t]||t}</option>`).join('');
+
+  const rows = sorted.map(c => {
+    const imgHtml = c.image
+      ? `<img class="comp-img" src="${c.image}" alt="" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`
+        + `<div class="comp-img-placeholder" style="display:none">${esc(c.name.slice(0,4))}</div>`
+      : `<div class="comp-img-placeholder">${esc(c.name.slice(0,4))}</div>`;
+
+    return `<div class="comp-row">
+      ${imgHtml}
+      <div class="comp-name">
+        ${esc(c.name)}
+        <div class="comp-meta">${c.usage ? `${c.usage} utilizzi` : ''} ${c.comp_score ? `· ${c.comp_score} score` : ''}</div>
+      </div>
+      <div>${tierBadge(c.tier)}</div>
+      <select class="comp-tier-sel" onchange="changeTier('${adminTypeFilter}','${c.id}',this.value)">
+        ${tiers.map(t => `<option value="${t}" ${t===c.tier?'selected':''}>${TIER_LABELS[t]||t}</option>`).join('')}
+      </select>
+    </div>`;
+  }).join('');
+
+  document.getElementById('admin-comp-panel').innerHTML = `
+    <div class="section-title">Tipo Componente</div>
+    <div class="type-filter">${filterHtml}</div>
+    <div class="card" style="padding:.5rem 1rem">${rows || '<p style="color:var(--txt3);font-size:.8rem;padding:.5rem 0">Nessun componente</p>'}</div>
+    <button class="btn-outline" style="margin-top:.5rem" onclick="addCompPrompt('${adminTypeFilter}')">+ Aggiungi componente</button>`;
+}
+
+function setAdminFilter(type) {
+  adminTypeFilter = type;
+  renderAdminComp();
+}
+
+function changeTier(type, id, newTier) {
+  const tierPoints = { GOD:8, S:6, A:4, B:2, C:0, TOP:1, STANDARD:0 };
+  const pts = tierPoints[newTier] ?? 0;
+  saveCompOverride(type, id, { tier: newTier, points: pts });
+  renderAdminComp();
+}
+
+function addCompPrompt(type) {
+  const name = prompt(`Nome del nuovo ${type}:`);
+  if (!name) return;
+  const tier = prompt('Tier (GOD/S/A/B/C):','C')?.toUpperCase() || 'C';
+  const tierPoints = { GOD:8, S:6, A:4, B:2, C:0 };
+  const id = name.toLowerCase().replace(/\s+/g,'');
+  saveCompOverride(type, id, { id, name, tier, points: tierPoints[tier]||0, usage:0, comp_score:0, image:null });
+  renderAdminComp();
+}
+
+function renderAdminBonusMalus() {
+  const malusRows = (cfg.malusCombos || []).map((mc,i) => {
+    const bName = mc.blade  ? (findComp('blade',mc.blade)?.name  || mc.blade)  : '—';
+    const rName = mc.ratchet
+      ? Array.isArray(mc.ratchet) ? mc.ratchet.join(' / ')
+        : (findComp('ratchet',mc.ratchet)?.name || mc.ratchet)
+      : 'qualsiasi';
+    const tName = mc.bit    ? (findComp('bit',mc.bit)?.name      || mc.bit)    : '—';
+    return `<div class="malus-row">
+      <div class="malus-row-hdr">
+        <div class="malus-label">${esc(mc.label)}</div>
+        <div style="display:flex;align-items:center;gap:.5rem">
+          <span class="malus-pts-badge">+${mc.malus} PT</span>
+          <button class="btn-icon" style="color:var(--red)" onclick="removeMalus(${i})">✕</button>
+        </div>
+      </div>
+      <div class="malus-parts">${esc(bName)} · ${esc(rName)} · ${esc(tName)}</div>
+    </div>`;
+  }).join('');
+
+  document.getElementById('admin-bonmal-panel').innerHTML = `
+    <div class="section-title">Bonus Strutturale</div>
+    <div class="card card-sm" style="display:flex;align-items:center;justify-content:space-between;gap:.75rem">
+      <div>
+        <div style="font-size:.85rem;font-weight:700">Sconto CX</div>
+        <div style="font-size:.72rem;color:var(--txt3)">Applicato su lame CX / CX Infiniti</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:.4rem">
+        <button class="btn-icon" onclick="changeCxDiscount(-1)">−</button>
+        <span id="cx-disc-val" style="font-size:.95rem;font-weight:800;color:var(--green);min-width:2rem;text-align:center">${cfg.cxDiscount}</span>
+        <button class="btn-icon" onclick="changeCxDiscount(1)">+</button>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+    <div class="section-title">Malus Build Meta</div>
+    ${malusRows}
+    <div class="malus-add-form">
+      <div class="section-title" style="margin-bottom:.6rem">+ Aggiungi Malus</div>
+      <div class="field-row">
+        <label class="field-lbl">Label</label>
+        <input class="input" id="new-malus-label" placeholder="es. SharkScale meta" />
+      </div>
+      <div class="field-row">
+        <label class="field-lbl">Blade ID</label>
+        <input class="input" id="new-malus-blade" placeholder="es. sharkscale" />
+      </div>
+      <div class="field-row">
+        <label class="field-lbl">Ratchet (lascia vuoto = qualsiasi)</label>
+        <input class="input" id="new-malus-ratchet" placeholder="es. 170  (o 1-70, il trattino viene rimosso)" />
+      </div>
+      <div class="field-row">
+        <label class="field-lbl">Bit ID</label>
+        <input class="input" id="new-malus-bit" placeholder="es. lowrush" />
+      </div>
+      <div class="field-row">
+        <label class="field-lbl">Punti Malus</label>
+        <input class="input" id="new-malus-pts" type="number" value="2" min="1" max="10" />
+      </div>
+      <button class="btn-primary" onclick="addMalus()">Aggiungi</button>
+    </div>`;
+}
+
+function changeCxDiscount(delta) {
+  cfg.cxDiscount = (cfg.cxDiscount || 0) + delta;
+  document.getElementById('cx-disc-val').textContent = cfg.cxDiscount;
+  saveConfig();
+}
+
+function removeMalus(i) {
+  cfg.malusCombos.splice(i, 1);
+  saveConfig();
+  renderAdminBonusMalus();
+}
+
+function addMalus() {
+  const label  = document.getElementById('new-malus-label').value.trim();
+  const blade  = document.getElementById('new-malus-blade').value.trim().toLowerCase() || null;
+  const ratchet= (document.getElementById('new-malus-ratchet').value.trim().replace(/-/g,'').toLowerCase()) || null;
+  const bit    = document.getElementById('new-malus-bit').value.trim().toLowerCase() || null;
+  const malus  = parseInt(document.getElementById('new-malus-pts').value) || 2;
+  if (!label) return;
+  cfg.malusCombos.push({ id: 'custom_'+Date.now(), label, blade, ratchet, bit, malus });
+  saveConfig();
+  renderAdminBonusMalus();
+}
+
+// ═══════════════════════════════════════════════════════ UTILS
+
+function esc(str) {
+  if (!str) return '';
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ── Name input sync
+document.getElementById('deck-name-input').addEventListener('input', e => {
+  editingDeck.name = e.target.value;
+  document.getElementById('builder-title').textContent = e.target.value || 'Nuovo Deck';
+});
+
+// ── Init
+renderList();
+</script>
+</body>
+</html>
