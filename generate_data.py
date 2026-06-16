@@ -258,9 +258,6 @@ def load_excel_competitive_data() -> dict:
             ss = _shared_strings(zf)
             rows = _read_sheet(zf, 2, ss, 3000)
 
-        # Combo data columns (cols 0-5, one per row = one tournament combo):
-        # [0]=LockChip, [1]=OBlade, [2]=MainBlade/Blade, [3]=AssistBlade,
-        # [4]=Ratchet, [5]=Bit, ...
         # Part statistics sidebar (from col 27 onwards):
         # [27]=LockChip Name, [28]=LC pts, [29]=LC usage, [30]=LC comp
         # [32]=OBlade Name, [33]=OB pts, [34]=OB usage, [35]=OB comp
@@ -268,15 +265,6 @@ def load_excel_competitive_data() -> dict:
         # [43]=Assist Name, [44]=A pts, [45]=A usage, [46]=A comp
         # [48]=Ratchet Name, [49]=R pts, [50]=R usage, [51]=R comp
         # [53]=Bit Name, [54]=Bt pts, [55]=Bt usage, [56]=Bt comp
-
-        # First pass: detect which blades appear in CX combos
-        # (rows where the combo's LockChip slot, col 0, is non-empty)
-        cx_blade_keys: set[str] = set()
-        for row in rows[1:]:
-            lc_combo  = row[0].strip() if len(row) > 0 else ""
-            blade_combo = row[2].strip() if len(row) > 2 else ""
-            if lc_combo and blade_combo:
-                cx_blade_keys.add(norm(blade_combo))
 
         type_cols = {
             "lockchip":   (27, 29, 30),
@@ -301,12 +289,9 @@ def load_excel_competitive_data() -> dict:
                         comp  = float(row[comp_col]) if comp_col < len(row) else 0.0
                     except (ValueError, IndexError):
                         usage, comp = 0, 0.0
-                    entry: dict = {"usage": usage, "comp_score": comp, "type": t, "name": name}
-                    if t == "blade":
-                        entry["anatomy"] = "cx" if key in cx_blade_keys else "standard"
-                    result[key] = entry
+                    result[key] = {"usage": usage, "comp_score": comp, "type": t, "name": name}
 
-        print(f"  CX blades detected: {sorted(cx_blade_keys)}")
+
     except Exception as e:
         print(f"[warn] Excel read error: {e}")
 
@@ -352,13 +337,15 @@ TIER_POINTS = {
 }
 
 COMPONENT_TYPES = [
-    # (search_query, prefix_to_strip, internal_type, image_keyword)
-    ("Blade - ",         "Blade",        "blade",        "Blade"),
-    ("Ratchet - ",       "Ratchet",      "ratchet",      "Ratchet"),
-    ("Bit - ",           "Bit",          "bit",          "Bit"),
-    ("Assist Blade - ",  "Assist Blade", "assistblade",  "Assist"),
-    ("Over Blade - ",    "Over Blade",   "overblade",    "Over"),
-    ("Lock Chip - ",     "Lock Chip",    "lockchip",     "Lock"),
+    # (search_query, prefix_to_strip, internal_type, image_keyword, anatomy)
+    # anatomy is only set for blades (standard vs cx); None for other types
+    ("Blade - ",         "Blade",        "blade",        "Blade",  "standard"),
+    ("Main Blade - ",    "Main Blade",   "blade",        "Blade",  "cx"),
+    ("Ratchet - ",       "Ratchet",      "ratchet",      "Ratchet", None),
+    ("Bit - ",           "Bit",          "bit",          "Bit",     None),
+    ("Assist Blade - ",  "Assist Blade", "assistblade",  "Assist",  None),
+    ("Over Blade - ",    "Over Blade",   "overblade",    "Over",    None),
+    ("Lock Chip - ",     "Lock Chip",    "lockchip",     "Lock",    None),
 ]
 
 # Pages to skip (not actual Beyblade X components)
@@ -381,7 +368,7 @@ def should_skip(title: str) -> bool:
 
 
 def fetch_components(search_query: str, prefix: str, comp_type: str,
-                     img_keyword: str, excel: dict) -> list[dict]:
+                     img_keyword: str, excel: dict, anatomy: str | None = None) -> list[dict]:
     print(f"\n  Searching: '{search_query}' ...")
     titles = search_pages(search_query, limit=200)
     print(f"  Found {len(titles)} pages")
@@ -413,9 +400,8 @@ def fetch_components(search_query: str, prefix: str, comp_type: str,
             "comp_score": round(edata.get("comp_score", 0.0), 2),
             "image":      img,
         }
-        if comp_type == "blade":
-            # Inherit anatomy from Excel detection; default to "standard" if not in Excel
-            entry["anatomy"] = edata.get("anatomy", "standard")
+        if anatomy is not None:
+            entry["anatomy"] = anatomy
         components.append(entry)
 
     return components
@@ -436,10 +422,12 @@ def main():
     print("\n[2] Fetching components from Fandom API...")
     all_components: dict[str, list] = {}
 
-    for search_q, prefix, comp_type, img_kw in COMPONENT_TYPES:
-        comps = fetch_components(search_q, prefix, comp_type, img_kw, excel)
-        all_components[comp_type] = comps
-        print(f"  → {len(comps)} {comp_type} components fetched")
+    for search_q, prefix, comp_type, img_kw, anatomy in COMPONENT_TYPES:
+        comps = fetch_components(search_q, prefix, comp_type, img_kw, excel, anatomy)
+        if comp_type not in all_components:
+            all_components[comp_type] = []
+        all_components[comp_type].extend(comps)
+        print(f"  → {len(comps)} {comp_type} ({anatomy or 'n/a'}) components fetched")
 
     # Add implicit Plastic Lock Chip (not on Fandom as own page)
     all_components["lockchip"].append({

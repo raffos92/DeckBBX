@@ -40,7 +40,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/0/00/BladeStone.png/revision/latest?cb=20220219224617"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/0/00/BladeStone.png/revision/latest?cb=20220219224617",
+        "anatomy": "standard"
       },
       {
         "id": "destruction",
@@ -50,7 +51,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/f/f9/BladeDestruction.png/revision/latest?cb=20220103061530"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/f/f9/BladeDestruction.png/revision/latest?cb=20220103061530",
+        "anatomy": "standard"
       },
       {
         "id": "dangerous",
@@ -60,7 +62,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/e/e6/BladeDangerous.png/revision/latest?cb=20210915033805"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/e/e6/BladeDangerous.png/revision/latest?cb=20210915033805",
+        "anatomy": "standard"
       },
       {
         "id": "decay",
@@ -70,7 +73,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/9/93/BladeDecayRender.png/revision/latest?cb=20221208072927"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/9/93/BladeDecayRender.png/revision/latest?cb=20221208072927",
+        "anatomy": "standard"
       },
       {
         "id": "ultimate(takaratomy)",
@@ -80,7 +84,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5b/BladeUltimate.png/revision/latest?cb=20211115060711"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5b/BladeUltimate.png/revision/latest?cb=20211115060711",
+        "anatomy": "standard"
       },
       {
         "id": "impactdrake",
@@ -90,7 +95,8 @@ const BBX_DATA = {
         "points": 2,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/b/b1/BladeImpactDrake.png/revision/latest?cb=20241115024018"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/b/b1/BladeImpactDrake.png/revision/latest?cb=20241115024018",
+        "anatomy": "standard"
       },
       {
         "id": "glory",
@@ -100,7 +106,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5f/BladeGloryRender.png/revision/latest?cb=20221205075102"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5f/BladeGloryRender.png/revision/latest?cb=20221205075102",
+        "anatomy": "standard"
       },
       {
         "id": "phoenixwing",
@@ -110,7 +117,8 @@ const BBX_DATA = {
         "points": 6,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/2/2d/BladePhoenixWing.png/revision/latest?cb=20231115091927"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/2/2d/BladePhoenixWing.png/revision/latest?cb=20231115091927",
+        "anatomy": "standard"
       },
       {
         "id": "hellshammer",
@@ -120,7 +128,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/6/67/BladeHellsHammer.png/revision/latest?cb=20240215060611"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/6/67/BladeHellsHammer.png/revision/latest?cb=20240215060611",
+        "anatomy": "standard"
       },
       {
         "id": "gbladedxset",
@@ -130,7 +139,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/0/0f/GBladeDXSet.jpeg/revision/latest?cb=20130406025242"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/0/0f/GBladeDXSet.jpeg/revision/latest?cb=20130406025242",
+        "anatomy": "standard"
       },
       {
         "id": "savior",
@@ -140,7 +150,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/4/43/BladeSavior.png/revision/latest?cb=20210615063345"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/4/43/BladeSavior.png/revision/latest?cb=20210615063345",
+        "anatomy": "standard"
       },
       {
         "id": "apocalypsebladeset",
@@ -150,7 +161,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/6/6c/ABL_Product.jpg/revision/latest?cb=20200717225520"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/6/6c/ABL_Product.jpg/revision/latest?cb=20200717225520",
+        "anatomy": "standard"
       },
       {
         "id": "kerbecsbladeblast",
@@ -160,7 +172,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/3/32/BeybladeKerbecsBladeBlast.jpg/revision/latest?cb=20210415063726"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/3/32/BeybladeKerbecsBladeBlast.jpg/revision/latest?cb=20210415063726",
+        "anatomy": "standard"
       },
       {
         "id": "devil",
@@ -170,7 +183,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/3/34/BladeDevil.png/revision/latest?cb=20210615013725"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/3/34/BladeDevil.png/revision/latest?cb=20210615013725",
+        "anatomy": "standard"
       },
       {
         "id": "captainamerica",
@@ -180,7 +194,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/8/8d/Captain_America_4-70GB.jpeg/revision/latest?cb=20250618034930"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/8/8d/Captain_America_4-70GB.jpeg/revision/latest?cb=20250618034930",
+        "anatomy": "standard"
       },
       {
         "id": "silverwolf",
@@ -190,7 +205,8 @@ const BBX_DATA = {
         "points": 4,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/f/f1/BladeSilverWolf.png/revision/latest?cb=20240913034202"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/f/f1/BladeSilverWolf.png/revision/latest?cb=20240913034202",
+        "anatomy": "standard"
       },
       {
         "id": "knightshield",
@@ -200,7 +216,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/9/9c/BladeKnightShield.png/revision/latest?cb=20250609060142"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/9/9c/BladeKnightShield.png/revision/latest?cb=20250609060142",
+        "anatomy": "standard"
       },
       {
         "id": "dranstrike",
@@ -210,7 +227,8 @@ const BBX_DATA = {
         "points": 2,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/6/67/BladeDranStrike.png/revision/latest?cb=20260313031347"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/6/67/BladeDranStrike.png/revision/latest?cb=20260313031347",
+        "anatomy": "standard"
       },
       {
         "id": "shinobishadow",
@@ -220,7 +238,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/4/48/BladeShinobiShadow.png/revision/latest?cb=20250528201917"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/4/48/BladeShinobiShadow.png/revision/latest?cb=20250528201917",
+        "anatomy": "standard"
       },
       {
         "id": "gilded",
@@ -230,7 +249,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/e/e5/BladeGilded.png/revision/latest?cb=20220217060532"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/e/e5/BladeGilded.png/revision/latest?cb=20220217060532",
+        "anatomy": "standard"
       },
       {
         "id": "ghostcircle",
@@ -240,7 +260,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/7/7a/BladeGhostCircle.png/revision/latest?cb=20241115025132"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/7/7a/BladeGhostCircle.png/revision/latest?cb=20241115025132",
+        "anatomy": "standard"
       },
       {
         "id": "hellsscythe",
@@ -250,7 +271,8 @@ const BBX_DATA = {
         "points": 2,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/e/e4/BladeHellsScythe.png/revision/latest?cb=20250817035337"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/e/e4/BladeHellsScythe.png/revision/latest?cb=20250817035337",
+        "anatomy": "standard"
       },
       {
         "id": "heavensring",
@@ -260,7 +282,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": null
+        "image": null,
+        "anatomy": "standard"
       },
       {
         "id": "phoenixfeather",
@@ -270,7 +293,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/9/96/BladePhoenixFeather.png/revision/latest?cb=20231207074705"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/9/96/BladePhoenixFeather.png/revision/latest?cb=20231207074705",
+        "anatomy": "standard"
       },
       {
         "id": "wizardarrow",
@@ -280,7 +304,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/4/44/BladeWizardArrow.png/revision/latest?cb=20250626062049"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/4/44/BladeWizardArrow.png/revision/latest?cb=20250626062049",
+        "anatomy": "standard"
       },
       {
         "id": "guilty(takaratomy)",
@@ -290,7 +315,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/4/46/BladeGuilty.png/revision/latest?cb=20210812041847"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/4/46/BladeGuilty.png/revision/latest?cb=20210812041847",
+        "anatomy": "standard"
       },
       {
         "id": "weisstiger",
@@ -300,7 +326,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/3/37/BladeWeissTiger.png/revision/latest?cb=20240515052303"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/3/37/BladeWeissTiger.png/revision/latest?cb=20240515052303",
+        "anatomy": "standard"
       },
       {
         "id": "knightmail",
@@ -310,7 +337,8 @@ const BBX_DATA = {
         "points": 2,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/f/fc/BladeKnightMail.png/revision/latest?cb=20241015034144"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/f/fc/BladeKnightMail.png/revision/latest?cb=20241015034144",
+        "anatomy": "standard"
       },
       {
         "id": "cyclone(takaratomy)",
@@ -320,7 +348,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/f/f7/BladeCyclone.png/revision/latest?cb=20210315113321"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/f/f7/BladeCyclone.png/revision/latest?cb=20210315113321",
+        "anatomy": "standard"
       },
       {
         "id": "phoenixrudder",
@@ -330,7 +359,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/0/0f/BladePhoenixRudder.png/revision/latest?cb=20250528203411"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/0/0f/BladePhoenixRudder.png/revision/latest?cb=20250528203411",
+        "anatomy": "standard"
       },
       {
         "id": "tyrannobeat",
@@ -340,7 +370,8 @@ const BBX_DATA = {
         "points": 4,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/f/ff/BladeTyrannoBeat.png/revision/latest?cb=20240415173927"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/f/ff/BladeTyrannoBeat.png/revision/latest?cb=20240415173927",
+        "anatomy": "standard"
       },
       {
         "id": "talonptera",
@@ -350,7 +381,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/e/ee/Quetzalcoatlus_4-55D.png/revision/latest?cb=20250808060150"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/e/ee/Quetzalcoatlus_4-55D.png/revision/latest?cb=20250808060150",
+        "anatomy": "standard"
       },
       {
         "id": "devastate",
@@ -360,7 +392,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5c/BladeDevastateRender.png/revision/latest?cb=20220531060500"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5c/BladeDevastateRender.png/revision/latest?cb=20220531060500",
+        "anatomy": "standard"
       },
       {
         "id": "samuraisaber",
@@ -370,7 +403,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/d/de/BladeSamuraiSaber.png/revision/latest?cb=20241015033005"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/d/de/BladeSamuraiSaber.png/revision/latest?cb=20241015033005",
+        "anatomy": "standard"
       },
       {
         "id": "dynamite",
@@ -380,7 +414,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/c/cd/BladeDynamite.png/revision/latest?cb=20210315113258"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/c/cd/BladeDynamite.png/revision/latest?cb=20210315113258",
+        "anatomy": "standard"
       },
       {
         "id": "unicornsting",
@@ -390,7 +425,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/1/15/BladeUnicornSting.png/revision/latest?cb=20240115194629"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/1/15/BladeUnicornSting.png/revision/latest?cb=20240115194629",
+        "anatomy": "standard"
       },
       {
         "id": "scorpiospear",
@@ -400,7 +436,8 @@ const BBX_DATA = {
         "points": 2,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/8/89/BladeScorpioSpear.png/revision/latest?cb=20250614081207"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/8/89/BladeScorpioSpear.png/revision/latest?cb=20250614081207",
+        "anatomy": "standard"
       },
       {
         "id": "knightlance",
@@ -410,7 +447,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/c/cb/BladeKnightLance.png/revision/latest?cb=20230808063816"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/c/cb/BladeKnightLance.png/revision/latest?cb=20230808063816",
+        "anatomy": "standard"
       },
       {
         "id": "vipertail",
@@ -420,7 +458,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/9/9d/BladeViperTail.png/revision/latest?cb=20250818205656"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/9/9d/BladeViperTail.png/revision/latest?cb=20250818205656",
+        "anatomy": "standard"
       },
       {
         "id": "wizardrod",
@@ -430,7 +469,8 @@ const BBX_DATA = {
         "points": 8,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/a/a3/BladeWizardRod.png/revision/latest?cb=20240222003334"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/a/a3/BladeWizardRod.png/revision/latest?cb=20240222003334",
+        "anatomy": "standard"
       },
       {
         "id": "katana",
@@ -440,7 +480,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/c/c6/BladeKatanaRender.png/revision/latest?cb=20220402045455"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/c/c6/BladeKatanaRender.png/revision/latest?cb=20220402045455",
+        "anatomy": "standard"
       },
       {
         "id": "steelsamurai",
@@ -450,7 +491,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/2/29/SamuraiSteel_5-70GF.jpg/revision/latest?cb=20250514082453"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/2/29/SamuraiSteel_5-70GF.jpg/revision/latest?cb=20250514082453",
+        "anatomy": "standard"
       },
       {
         "id": "knifeshinobi",
@@ -460,7 +502,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/2/25/BladeKnifeShinobi.png/revision/latest?cb=20250815182407"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/2/25/BladeKnifeShinobi.png/revision/latest?cb=20250815182407",
+        "anatomy": "standard"
       },
       {
         "id": "samuraicalibur",
@@ -470,7 +513,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/a/ab/BladeSamuraiCalibur.png/revision/latest?cb=20250715051328"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/a/ab/BladeSamuraiCalibur.png/revision/latest?cb=20250715051328",
+        "anatomy": "standard"
       },
       {
         "id": "gillshark",
@@ -480,7 +524,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/3/3b/Gill_Shark_4-70O.jpeg/revision/latest?cb=20250820040436"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/3/3b/Gill_Shark_4-70O.jpeg/revision/latest?cb=20250820040436",
+        "anatomy": "standard"
       },
       {
         "id": "sharkedge",
@@ -490,7 +535,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/2/2e/BladeSharkEdge.png/revision/latest?cb=20230812203549"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/2/2e/BladeSharkEdge.png/revision/latest?cb=20230812203549",
+        "anatomy": "standard"
       },
       {
         "id": "leoncrest",
@@ -500,7 +546,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/c/c7/BladeLeonCrest.png/revision/latest?cb=20240712055426"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/c/c7/BladeLeonCrest.png/revision/latest?cb=20240712055426",
+        "anatomy": "standard"
       },
       {
         "id": "shelterdrake",
@@ -510,7 +557,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/8/89/BladeShelterDrake.png/revision/latest?cb=20250530222732"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/8/89/BladeShelterDrake.png/revision/latest?cb=20250530222732",
+        "anatomy": "standard"
       },
       {
         "id": "vanish(takaratomy)",
@@ -520,7 +568,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5c/BladeVanish.png/revision/latest?cb=20210514115222"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5c/BladeVanish.png/revision/latest?cb=20210514115222",
+        "anatomy": "standard"
       },
       {
         "id": "hellschain",
@@ -530,7 +579,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/8/83/BladeHellsChain.png/revision/latest?cb=20250528203625"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/8/83/BladeHellsChain.png/revision/latest?cb=20250528203625",
+        "anatomy": "standard"
       },
       {
         "id": "spiderman",
@@ -540,7 +590,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/4/4e/Spider-Man_3-60F.jpeg/revision/latest?cb=20240729053252"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/4/4e/Spider-Man_3-60F.jpeg/revision/latest?cb=20240729053252",
+        "anatomy": "standard"
       },
       {
         "id": "sphinxcowl",
@@ -550,7 +601,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/3/31/BladeSphinxCowl.png/revision/latest?cb=20250528201304"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/3/31/BladeSphinxCowl.png/revision/latest?cb=20250528201304",
+        "anatomy": "standard"
       },
       {
         "id": "lightningldrago(uppertype)",
@@ -560,7 +612,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/d/d0/BladeLightningL-Drago%28UpperType%29.png/revision/latest?cb=20240809163223"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/d/d0/BladeLightningL-Drago%28UpperType%29.png/revision/latest?cb=20240809163223",
+        "anatomy": "standard"
       },
       {
         "id": "astral(takaratomy)",
@@ -570,7 +623,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/9/9c/BladeAstral.png/revision/latest?cb=20210715041907"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/9/9c/BladeAstral.png/revision/latest?cb=20210715041907",
+        "anatomy": "standard"
       },
       {
         "id": "crimsongaruda",
@@ -580,7 +634,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/6/60/BladeCrimsonGaruda.png/revision/latest?cb=20241015052049"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/6/60/BladeCrimsonGaruda.png/revision/latest?cb=20241015052049",
+        "anatomy": "standard"
       },
       {
         "id": "ironman",
@@ -590,7 +645,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/c/c8/Iron_Man_4-80B.jpeg/revision/latest?cb=20240729052810"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/c/c8/Iron_Man_4-80B.jpeg/revision/latest?cb=20240729052810",
+        "anatomy": "standard"
       },
       {
         "id": "wyverngale",
@@ -600,7 +656,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/3/3d/BladeWyvernGale.png/revision/latest?cb=20231115091914"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/3/3d/BladeWyvernGale.png/revision/latest?cb=20231115091914",
+        "anatomy": "standard"
       },
       {
         "id": "cobaltdrake",
@@ -610,7 +667,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/2/2f/BladeCobaltDrake.png/revision/latest?cb=20250528202030"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/2/2f/BladeCobaltDrake.png/revision/latest?cb=20250528202030",
+        "anatomy": "standard"
       },
       {
         "id": "drandagger",
@@ -620,7 +678,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/c/c8/BladeDranDagger.png/revision/latest?cb=20250528202141"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/c/c8/BladeDranDagger.png/revision/latest?cb=20250528202141",
+        "anatomy": "standard"
       },
       {
         "id": "magma",
@@ -630,7 +689,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/c/cc/BladeMagma.png/revision/latest?cb=20211217091830"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/c/cc/BladeMagma.png/revision/latest?cb=20211217091830",
+        "anatomy": "standard"
       },
       {
         "id": "golemrock",
@@ -640,7 +700,8 @@ const BBX_DATA = {
         "points": 2,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/2/27/BladeGolemRock.png/revision/latest?cb=20250115052241"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/2/27/BladeGolemRock.png/revision/latest?cb=20250115052241",
+        "anatomy": "standard"
       },
       {
         "id": "aeropegasus",
@@ -650,7 +711,8 @@ const BBX_DATA = {
         "points": 4,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/5/58/BladeAeroPegasus.png/revision/latest?cb=20250528202546"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/5/58/BladeAeroPegasus.png/revision/latest?cb=20250528202546",
+        "anatomy": "standard"
       },
       {
         "id": "mummycurse",
@@ -660,7 +722,8 @@ const BBX_DATA = {
         "points": 2,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/a/ab/BladeMummyCurse.png/revision/latest?cb=20251114034130"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/a/ab/BladeMummyCurse.png/revision/latest?cb=20251114034130",
+        "anatomy": "standard"
       },
       {
         "id": "salvage",
@@ -670,7 +733,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/5/51/BladeSalvage.png/revision/latest?cb=20220325235345"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/5/51/BladeSalvage.png/revision/latest?cb=20220325235345",
+        "anatomy": "standard"
       },
       {
         "id": "dranbuster",
@@ -680,7 +744,8 @@ const BBX_DATA = {
         "points": 2,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/d/db/BladeDranBuster.png/revision/latest?cb=20250528202327"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/d/db/BladeDranBuster.png/revision/latest?cb=20250528202327",
+        "anatomy": "standard"
       },
       {
         "id": "tacklegoat",
@@ -690,7 +755,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/c/cd/Tackle_Goat_2-70N.jpeg/revision/latest?cb=20250815160707"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/c/cd/Tackle_Goat_2-70N.jpeg/revision/latest?cb=20250815160707",
+        "anatomy": "standard"
       },
       {
         "id": "stormpegasis",
@@ -700,7 +766,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/2/2a/StormPegasis_3-70RA.jpeg/revision/latest?cb=20240717033658"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/2/2a/StormPegasis_3-70RA.jpeg/revision/latest?cb=20240717033658",
+        "anatomy": "standard"
       },
       {
         "id": "tuskmammoth",
@@ -710,7 +777,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/9/9c/MammothTusk_2-80E.png/revision/latest?cb=20241115015002"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/9/9c/MammothTusk_2-80E.png/revision/latest?cb=20241115015002",
+        "anatomy": "standard"
       },
       {
         "id": "rhinohorn",
@@ -720,7 +788,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/4/41/BladeRhinoHorn.png/revision/latest?cb=20250528201123"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/4/41/BladeRhinoHorn.png/revision/latest?cb=20250528201123",
+        "anatomy": "standard"
       },
       {
         "id": "hoverwyvern",
@@ -730,7 +799,8 @@ const BBX_DATA = {
         "points": 2,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/7/71/Hover_Wyvern_3-85N.jpeg/revision/latest?cb=20250612062923"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/7/71/Hover_Wyvern_3-85N.jpeg/revision/latest?cb=20250612062923",
+        "anatomy": "standard"
       },
       {
         "id": "roartyranno",
@@ -740,7 +810,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5e/Roar_Tyranno_9-60GF.jpeg/revision/latest?cb=20241003084111"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5e/Roar_Tyranno_9-60GF.jpeg/revision/latest?cb=20241003084111",
+        "anatomy": "standard"
       },
       {
         "id": "savagebear",
@@ -750,7 +821,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/1/1e/BearScratch_%28BX-37%29.png/revision/latest?cb=20240913033714"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/1/1e/BearScratch_%28BX-37%29.png/revision/latest?cb=20240913033714",
+        "anatomy": "standard"
       },
       {
         "id": "sharkscale",
@@ -760,7 +832,8 @@ const BBX_DATA = {
         "points": 6,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/e/e0/BladeSharkScale.png/revision/latest?cb=20250715051433"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/e/e0/BladeSharkScale.png/revision/latest?cb=20250715051433",
+        "anatomy": "standard"
       },
       {
         "id": "whalewave",
@@ -770,7 +843,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/8/89/BladeWhaleWave.png/revision/latest?cb=20240812022438"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/8/89/BladeWhaleWave.png/revision/latest?cb=20240812022438",
+        "anatomy": "standard"
       },
       {
         "id": "dransword",
@@ -780,7 +854,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5f/BladeDranSword.png/revision/latest?cb=20250814202546"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5f/BladeDranSword.png/revision/latest?cb=20250814202546",
+        "anatomy": "standard"
       },
       {
         "id": "chewbacca",
@@ -790,7 +865,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/3/3f/Chewbacca_4-80LF.jpeg/revision/latest?cb=20250903053227"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/3/3f/Chewbacca_4-80LF.jpeg/revision/latest?cb=20250903053227",
+        "anatomy": "standard"
       },
       {
         "id": "starscream",
@@ -800,7 +876,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/c/c1/Starscream_3-80N.jpeg/revision/latest?cb=20240514171842"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/c/c1/Starscream_3-80N.jpeg/revision/latest?cb=20240514171842",
+        "anatomy": "standard"
       },
       {
         "id": "blackshell",
@@ -810,7 +887,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/3/3c/BladeBlackShell.png/revision/latest?cb=20250528201216"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/3/3c/BladeBlackShell.png/revision/latest?cb=20250528201216",
+        "anatomy": "standard"
       },
       {
         "id": "lightningldrago(rapidhittype)",
@@ -820,7 +898,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5b/BladeLightningL-Drago%28Rapid-HitType%29.png/revision/latest?cb=20240809163229"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5b/BladeLightningL-Drago%28Rapid-HitType%29.png/revision/latest?cb=20240809163229",
+        "anatomy": "standard"
       },
       {
         "id": "triceraspiky",
@@ -830,7 +909,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/7/78/BladeTriceraSpiky.png/revision/latest?cb=20260207193346"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/7/78/BladeTriceraSpiky.png/revision/latest?cb=20260207193346",
+        "anatomy": "standard"
       },
       {
         "id": "prominence(takaratomy)",
@@ -840,7 +920,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/b/bc/BladeProminence.png/revision/latest?cb=20210915033819"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/b/bc/BladeProminence.png/revision/latest?cb=20210915033819",
+        "anatomy": "standard"
       },
       {
         "id": "gustbat",
@@ -850,7 +931,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": null
+        "image": null,
+        "anatomy": "standard"
       },
       {
         "id": "roar(takaratomy)",
@@ -860,7 +942,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/5/58/BladeRoar.png/revision/latest?cb=20210615062559"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/5/58/BladeRoar.png/revision/latest?cb=20210615062559",
+        "anatomy": "standard"
       },
       {
         "id": "themandalorian",
@@ -870,7 +953,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/9/96/The_Mandalorian_3-60F.jpeg/revision/latest?cb=20240729052605"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/9/96/The_Mandalorian_3-60F.jpeg/revision/latest?cb=20240729052605",
+        "anatomy": "standard"
       },
       {
         "id": "thanos",
@@ -880,7 +964,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/a/af/Thanos_4-60P.jpeg/revision/latest?cb=20240729052849"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/a/af/Thanos_4-60P.jpeg/revision/latest?cb=20240729052849",
+        "anatomy": "standard"
       },
       {
         "id": "redhulk",
@@ -890,7 +975,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/e/ed/Red_Hulk_1-80R.jpeg/revision/latest?cb=20250618034946"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/e/ed/Red_Hulk_1-80R.jpeg/revision/latest?cb=20250618034946",
+        "anatomy": "standard"
       },
       {
         "id": "xenoxcalibur",
@@ -900,7 +986,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/b/bb/BladeXenoXcalibur.png/revision/latest?cb=20250322231907"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/b/bb/BladeXenoXcalibur.png/revision/latest?cb=20250322231907",
+        "anatomy": "standard"
       },
       {
         "id": "berserk",
@@ -910,7 +997,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/9/9c/BladeBerserk.png/revision/latest?cb=20220217064900"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/9/9c/BladeBerserk.png/revision/latest?cb=20220217064900",
+        "anatomy": "standard"
       },
       {
         "id": "yellkong",
@@ -920,7 +1008,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/0/03/Yell_Kong_3-60GB.jpeg/revision/latest?cb=20241003085621"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/0/03/Yell_Kong_3-60GB.jpeg/revision/latest?cb=20241003085621",
+        "anatomy": "standard"
       },
       {
         "id": "generalgrievous",
@@ -930,7 +1019,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5e/General_Grievous_3-80HN.jpeg/revision/latest?cb=20250618035039"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/5/5e/General_Grievous_3-80HN.jpeg/revision/latest?cb=20250618035039",
+        "anatomy": "standard"
       },
       {
         "id": "moffgideon",
@@ -940,7 +1030,8 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/6/6f/Moff_Gideon_3-80N.jpeg/revision/latest?cb=20240729052534"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/6/6f/Moff_Gideon_3-80N.jpeg/revision/latest?cb=20240729052534",
+        "anatomy": "standard"
       },
       {
         "id": "greengoblin",
@@ -950,12 +1041,190 @@ const BBX_DATA = {
         "points": 0,
         "usage": 0,
         "comp_score": 0.0,
-        "image": "https://static.wikia.nocookie.net/beyblade/images/9/95/Green_Goblin_9-80HT.jpeg/revision/latest?cb=20250903053921"
+        "image": "https://static.wikia.nocookie.net/beyblade/images/9/95/Green_Goblin_9-80HT.jpeg/revision/latest?cb=20250903053921",
+        "anatomy": "standard"
       },
       {
         "id": "victoryvalkyrie",
         "name": "VictoryValkyrie",
         "type": "blade",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null,
+        "anatomy": "standard"
+      },
+      {
+        "id": "antler",
+        "name": "Antler",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "arc",
+        "name": "Arc",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "blast",
+        "name": "Blast",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "brave",
+        "name": "Brave",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "brush",
+        "name": "Brush",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "dark",
+        "name": "Dark",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "eclipse",
+        "name": "Eclipse",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "fang",
+        "name": "Fang",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "flame",
+        "name": "Flame",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "flare",
+        "name": "Flare",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "fort",
+        "name": "Fort",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "hunt",
+        "name": "Hunt",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "might",
+        "name": "Might",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "reaper",
+        "name": "Reaper",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "volt",
+        "name": "Volt",
+        "type": "blade",
+        "anatomy": "cx",
+        "tier": "C",
+        "points": 0,
+        "usage": 0,
+        "comp_score": 0.0,
+        "image": null
+      },
+      {
+        "id": "wriggle",
+        "name": "Wriggle",
+        "type": "blade",
+        "anatomy": "cx",
         "tier": "C",
         "points": 0,
         "usage": 0,
