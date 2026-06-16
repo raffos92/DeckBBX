@@ -234,9 +234,12 @@ const LS_PINNED  = 'bbx_pinned';
 const LS_CONFIG  = 'bbx_config';
 const LS_COMP    = 'bbx_comp_overrides';
 
+const DEFAULT_TIER_POINTS = { GOD:8, S:6, A:4, B:2, C:0, TOP:1, STANDARD:0 };
+
 // Deep-clone defaults from data.js
 let cfg  = JSON.parse(JSON.stringify(BBX_DATA.config));
 let comp = JSON.parse(JSON.stringify(BBX_DATA.components));
+if (!cfg.tierPoints) cfg.tierPoints = { ...DEFAULT_TIER_POINTS };
 
 // Merge localStorage overrides
 function loadOverrides() {
@@ -256,6 +259,8 @@ function loadOverrides() {
   }
 }
 loadOverrides();
+if (!cfg.tierPoints) cfg.tierPoints = { ...DEFAULT_TIER_POINTS };
+else cfg.tierPoints = { ...DEFAULT_TIER_POINTS, ...cfg.tierPoints };
 
 function saveConfig()   { localStorage.setItem(LS_CONFIG, JSON.stringify(cfg)); }
 function saveCompOverride(type, id, patch) {
@@ -308,6 +313,11 @@ function emptyBey() {
 
 // ═══════════════════════════════════════════════════════ POINT CALC
 
+function getPoints(c) {
+  if (!c) return 0;
+  return cfg.tierPoints?.[c.tier] ?? c.points ?? 0;
+}
+
 function calcBeyPts(bey) {
   let pts   = 0;
   let malus = 0;
@@ -315,14 +325,14 @@ function calcBeyPts(bey) {
 
   if (bey.type === 'standard') {
     const b = findComp('blade', bey.blade);
-    pts += b?.points || 0;
+    pts += getPoints(b);
   } else {
     // CX / CX Infiniti: blade = Main Metal Blade
     const b     = findComp('blade', bey.blade);
     const chip  = findComp('lockchip', bey.lockchip);
     const asst  = findComp('assistblade', bey.assistblade);
     const over  = bey.type === 'cxinfiniti' ? findComp('overblade', bey.overblade) : null;
-    const bladePts = (b?.points||0) + (chip?.points||0) + (asst?.points||0) + (over?.points||0);
+    const bladePts = getPoints(b) + getPoints(chip) + getPoints(asst) + getPoints(over);
     const disc  = cfg.cxDiscount || -2;
     pts += Math.max(0, bladePts + disc);
     cx = true;
@@ -330,7 +340,7 @@ function calcBeyPts(bey) {
 
   const r = findComp('ratchet', bey.ratchet);
   const t = findComp('bit',     bey.bit);
-  pts += (r?.points || 0) + (t?.points || 0);
+  pts += getPoints(r) + getPoints(t);
 
   // Malus check
   for (const mc of (cfg.malusCombos || [])) {
@@ -746,8 +756,7 @@ function setAdminFilter(type) {
 }
 
 function changeTier(type, id, newTier) {
-  const tierPoints = { GOD:8, S:6, A:4, B:2, C:0, TOP:1, STANDARD:0 };
-  const pts = tierPoints[newTier] ?? 0;
+  const pts = cfg.tierPoints?.[newTier] ?? 0;
   saveCompOverride(type, id, { tier: newTier, points: pts });
   renderAdminComp();
 }
@@ -756,10 +765,16 @@ function addCompPrompt(type) {
   const name = prompt(`Nome del nuovo ${type}:`);
   if (!name) return;
   const tier = prompt('Tier (GOD/S/A/B/C):','C')?.toUpperCase() || 'C';
-  const tierPoints = { GOD:8, S:6, A:4, B:2, C:0 };
   const id = name.toLowerCase().replace(/\s+/g,'');
-  saveCompOverride(type, id, { id, name, tier, points: tierPoints[tier]||0, usage:0, comp_score:0, image:null });
+  saveCompOverride(type, id, { id, name, tier, points: cfg.tierPoints?.[tier]||0, usage:0, comp_score:0, image:null });
   renderAdminComp();
+}
+
+function changeTierPoints(tier, val) {
+  const n = parseInt(val);
+  if (isNaN(n) || n < 0) return;
+  cfg.tierPoints[tier] = n;
+  saveConfig();
 }
 
 function renderAdminBonusMalus() {
@@ -782,7 +797,27 @@ function renderAdminBonusMalus() {
     </div>`;
   }).join('');
 
+  const tp = cfg.tierPoints;
+  const tierRows = [
+    { label:'Lame · Punte · Assist', tiers:['GOD','S','A','B','C'] },
+    { label:'Ratchet',               tiers:['TOP','STANDARD'] },
+  ].map(group => `
+    <div style="font-size:.72rem;color:var(--txt3);margin:.5rem 0 .35rem">${group.label}</div>
+    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+      ${group.tiers.map(t => `
+        <div style="display:flex;flex-direction:column;align-items:center;gap:.25rem;min-width:56px">
+          <span class="badge badge-tier-${t}" style="font-size:.6rem">${t}</span>
+          <input type="number" min="0" max="20" value="${tp[t] ?? 0}"
+            style="width:52px;text-align:center;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--txt);padding:.25rem;font-size:.85rem;font-weight:700"
+            onchange="changeTierPoints('${t}',this.value)" />
+        </div>`).join('')}
+    </div>`).join('');
+
   document.getElementById('admin-bonmal-panel').innerHTML = `
+    <div class="section-title">Punti per Tier</div>
+    <div class="card card-sm">${tierRows}</div>
+
+    <div class="divider"></div>
     <div class="section-title">Bonus Strutturale</div>
     <div class="card card-sm" style="display:flex;align-items:center;justify-content:space-between;gap:.75rem">
       <div>
