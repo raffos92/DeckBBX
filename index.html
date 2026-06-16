@@ -557,7 +557,7 @@ function renderBeyBody(bey, idx) {
         ${isStd ? 'Lama (Blade)' : 'Main / Metal Blade'}
         ${bey.blade ? tierBadge(findComp('blade',bey.blade)?.tier||'C') : ''}
       </div>
-      ${compSelect('blade','blade',bey.blade,idx)}
+      ${compSelect('blade','blade',bey.blade,idx, isStd ? 'standard' : 'cx')}
     </div>
 
     ${(isCx || isCxi) ? `
@@ -593,8 +593,14 @@ function renderBeyBody(bey, idx) {
     ${renderBreakdown(bey, idx)}`;
 }
 
-function compSelect(field, type, selectedId, slotIdx) {
-  const items = comp[type] || [];
+function compSelect(field, type, selectedId, slotIdx, anatomyFilter) {
+  let items = comp[type] || [];
+  // Filter blades by anatomy when specified (standard/cx)
+  if (type === 'blade' && anatomyFilter) {
+    const filtered = items.filter(c => c.anatomy === anatomyFilter);
+    // Fallback: if anatomy field missing (old data), show all blades
+    if (filtered.length > 0) items = filtered;
+  }
   // Group by tier
   const tiers = {};
   items.forEach(c => {
