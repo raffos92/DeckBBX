@@ -234,12 +234,18 @@ const LS_PINNED  = 'bbx_pinned';
 const LS_CONFIG  = 'bbx_config';
 const LS_COMP    = 'bbx_comp_overrides';
 
-const DEFAULT_TIER_POINTS = { GOD:8, S:6, A:4, B:2, C:0, TOP:1, STANDARD:0 };
+const DEFAULT_TIER_POINTS = {
+  blade:       { GOD:8, S:6, A:4, B:2, C:0 },
+  ratchet:     { TOP:1, STANDARD:0 },
+  bit:         { S:6, A:4, C:0 },
+  assistblade: { S:6, A:4, C:0 },
+  overblade:   { A:4, C:0 },
+  lockchip:    { S:6, C:0 },
+};
 
 // Deep-clone defaults from data.js
 let cfg  = JSON.parse(JSON.stringify(BBX_DATA.config));
 let comp = JSON.parse(JSON.stringify(BBX_DATA.components));
-if (!cfg.tierPoints) cfg.tierPoints = { ...DEFAULT_TIER_POINTS };
 
 // Merge localStorage overrides
 function loadOverrides() {
@@ -259,8 +265,13 @@ function loadOverrides() {
   }
 }
 loadOverrides();
-if (!cfg.tierPoints) cfg.tierPoints = { ...DEFAULT_TIER_POINTS };
-else cfg.tierPoints = { ...DEFAULT_TIER_POINTS, ...cfg.tierPoints };
+// Migrate from old flat format {GOD:8,...} to nested {blade:{GOD:8},...}
+if (!cfg.tierPoints || typeof Object.values(cfg.tierPoints ?? {})[0] !== 'object') {
+  cfg.tierPoints = {};
+}
+for (const [t, def] of Object.entries(DEFAULT_TIER_POINTS)) {
+  cfg.tierPoints[t] = { ...def, ...(cfg.tierPoints[t] || {}) };
+}
 
 function saveConfig()   { localStorage.setItem(LS_CONFIG, JSON.stringify(cfg)); }
 function saveCompOverride(type, id, patch) {
@@ -315,7 +326,7 @@ function emptyBey() {
 
 function getPoints(c) {
   if (!c) return 0;
-  return cfg.tierPoints?.[c.tier] ?? c.points ?? 0;
+  return cfg.tierPoints?.[c.type]?.[c.tier] ?? c.points ?? 0;
 }
 
 function calcBeyPts(bey) {
@@ -756,7 +767,7 @@ function setAdminFilter(type) {
 }
 
 function changeTier(type, id, newTier) {
-  const pts = cfg.tierPoints?.[newTier] ?? 0;
+  const pts = cfg.tierPoints?.[type]?.[newTier] ?? 0;
   saveCompOverride(type, id, { tier: newTier, points: pts });
   renderAdminComp();
 }
@@ -766,14 +777,14 @@ function addCompPrompt(type) {
   if (!name) return;
   const tier = prompt('Tier (GOD/S/A/B/C):','C')?.toUpperCase() || 'C';
   const id = name.toLowerCase().replace(/\s+/g,'');
-  saveCompOverride(type, id, { id, name, tier, points: cfg.tierPoints?.[tier]||0, usage:0, comp_score:0, image:null });
+  saveCompOverride(type, id, { id, name, tier, points: cfg.tierPoints?.[type]?.[tier]||0, usage:0, comp_score:0, image:null });
   renderAdminComp();
 }
 
-function changeTierPoints(tier, val) {
+function changeTierPoints(compType, tier, val) {
   const n = parseInt(val);
   if (isNaN(n) || n < 0) return;
-  cfg.tierPoints[tier] = n;
+  cfg.tierPoints[compType][tier] = n;
   saveConfig();
 }
 
@@ -797,25 +808,27 @@ function renderAdminBonusMalus() {
     </div>`;
   }).join('');
 
-  const tp = cfg.tierPoints;
-  const tierRows = [
-    { label:'Lame · Punte · Assist', tiers:['GOD','S','A','B','C'] },
-    { label:'Ratchet',               tiers:['TOP','STANDARD'] },
-  ].map(group => `
-    <div style="font-size:.72rem;color:var(--txt3);margin:.5rem 0 .35rem">${group.label}</div>
-    <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-      ${group.tiers.map(t => `
-        <div style="display:flex;flex-direction:column;align-items:center;gap:.25rem;min-width:56px">
-          <span class="badge badge-tier-${t}" style="font-size:.6rem">${t}</span>
-          <input type="number" min="0" max="20" value="${tp[t] ?? 0}"
-            style="width:52px;text-align:center;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--txt);padding:.25rem;font-size:.85rem;font-weight:700"
-            onchange="changeTierPoints('${t}',this.value)" />
-        </div>`).join('')}
+  const TYPE_LABELS = {
+    blade: 'Lame', ratchet: 'Ratchet', bit: 'Punte',
+    assistblade: 'Assist Blade', overblade: 'Over Blade', lockchip: 'Lock Chip',
+  };
+  const tierSections = Object.entries(cfg.tierPoints).map(([compType, tierMap]) => `
+    <div style="margin-bottom:.9rem">
+      <div style="font-size:.75rem;font-weight:700;color:var(--txt2);margin-bottom:.4rem;text-transform:uppercase;letter-spacing:.05em">${TYPE_LABELS[compType] || compType}</div>
+      <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+        ${Object.entries(tierMap).map(([tier, pts]) => `
+          <div style="display:flex;flex-direction:column;align-items:center;gap:.25rem;min-width:58px">
+            <span class="badge badge-tier-${tier}" style="font-size:.6rem">${tier}</span>
+            <input type="number" min="0" max="20" value="${pts}"
+              style="width:54px;text-align:center;background:var(--bg);border:1px solid var(--border);border-radius:6px;color:var(--txt);padding:.25rem;font-size:.85rem;font-weight:700"
+              onchange="changeTierPoints('${compType}','${tier}',this.value)" />
+          </div>`).join('')}
+      </div>
     </div>`).join('');
 
   document.getElementById('admin-bonmal-panel').innerHTML = `
     <div class="section-title">Punti per Tier</div>
-    <div class="card card-sm">${tierRows}</div>
+    <div class="card card-sm">${tierSections}</div>
 
     <div class="divider"></div>
     <div class="section-title">Bonus Strutturale</div>
