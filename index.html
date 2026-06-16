@@ -234,13 +234,14 @@ const LS_PINNED  = 'bbx_pinned';
 const LS_CONFIG  = 'bbx_config';
 const LS_COMP    = 'bbx_comp_overrides';
 
+const TIER_POINTS_VERSION = '2'; // bump when DEFAULT_TIER_POINTS changes
 const DEFAULT_TIER_POINTS = {
   blade:       { GOD:8, S:6, A:4, B:2, C:0 },
   ratchet:     { TOP:1, STANDARD:0 },
-  bit:         { S:6, A:4, C:0 },
-  assistblade: { S:6, A:4, C:0 },
-  overblade:   { A:4, C:0 },
-  lockchip:    { S:6, C:0 },
+  bit:         { S:3, A:2, C:0 },
+  assistblade: { S:3, A:1, C:0 },
+  overblade:   { A:1, C:0 },
+  lockchip:    { S:2, C:0 },
 };
 
 // Deep-clone defaults from data.js
@@ -266,8 +267,12 @@ function loadOverrides() {
 }
 loadOverrides();
 // Migrate from old flat format {GOD:8,...} to nested {blade:{GOD:8},...}
-if (!cfg.tierPoints || typeof Object.values(cfg.tierPoints ?? {})[0] !== 'object') {
+// or reset when TIER_POINTS_VERSION bumps (defaults changed)
+if (!cfg.tierPoints
+    || typeof Object.values(cfg.tierPoints ?? {})[0] !== 'object'
+    || cfg.tierPointsVersion !== TIER_POINTS_VERSION) {
   cfg.tierPoints = {};
+  cfg.tierPointsVersion = TIER_POINTS_VERSION;
 }
 for (const [t, def] of Object.entries(DEFAULT_TIER_POINTS)) {
   cfg.tierPoints[t] = { ...def, ...(cfg.tierPoints[t] || {}) };
